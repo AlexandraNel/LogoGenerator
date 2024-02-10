@@ -1,5 +1,25 @@
 {
+  "name": "logogenerator",
+  "version": "1.0.0",
+  "description": "A logo commandline logo generator application",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexandraNel/LogoGenerator.git"
+  },
+  "author": "Alexandra Nel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AlexandraNel/LogoGenerator/issues"
+  },
+  "homepage": "https://github.com/AlexandraNel/LogoGenerator#readme",
   "dependencies": {
-    "inquirer": "^9.2.14"
+    "inquirer": "^8.2.4"
   }
 }

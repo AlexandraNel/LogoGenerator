@@ -1,10 +1,9 @@
-const inquirer = require('inquirer');
+
 const fs = require('fs');
 const path = require('path');
-const shapes =  require ('./lib/shapes')
-
-//I am using an asynch function for my inquirer prompts as I want to allow my user to exit the process if initialised by accident
-//teh asynch function allows me to make my process readable and guide the steps in an easy to understand sequence
+// const Shapes =  require ('./lib/shapes')
+const inquirer = require('inquirer');
+// const logoPrompts = require('./lib/questions')
 
 async function logoPrompts(){
     //try block means I can use one .catch function for the entire block
@@ -50,10 +49,13 @@ async function logoPrompts(){
         },
     ]);
 
-    console.log('Generated logo.svg');
+    console.log('Generated logo.svg, check your folder');
         //function to create logo here
 
     } catch (error) {
         console.log ('This generator has malfunctioned, please try again', error);
     
 }};
+
+ 
+logoPrompts();
