@@ -51,6 +51,7 @@ async function logoPrompts() {
 
         ]);
 
+       let svgContent = svgMaker.userInputShape(secondQ); 
 
         console.log('Generated logo.svg, check your folder');
         //function to create logo here
