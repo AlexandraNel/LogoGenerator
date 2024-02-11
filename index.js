@@ -25,7 +25,7 @@ async function logoPrompts() {
         //async function continues on to the next Q if firstQ.start is true
         //we continue on to ask all the required questions
 
-        const secondQ = await inquirer.prompt([
+        const answers = await inquirer.prompt([
             {
                 type: 'input',
                 name: 'text',
@@ -38,7 +38,7 @@ async function logoPrompts() {
             },
             {
                 type: 'list',
-                name: 'shape',
+                name: 'shapeType',
                 message: 'Choose a shape that you would like your logo to be',
                 choices: ['Circle', 'Triangle', 'Square']
             },
@@ -47,11 +47,21 @@ async function logoPrompts() {
                 name: 'logoColour',
                 message: 'What colour would you like your LOGO to be? Write its name or the hex code',
             },
+            {
+                type: 'input',
+                name: 'bgFill',
+                message: 'what background would you like your logo to have? This will create a filled colour square behind your logo shape- if none, write none',
+            },
 
 
         ]);
 
-       let svgContent = svgMaker.userInputShape(secondQ); 
+        //calls my SVG class+constructor and passes the bgFill to it
+        let svg = new SVG(answers.bgFill);
+        // Populate SVG object with shape and text passing these paramaters to their methods
+        svg.userInputShape(answers.shapeType, answers.logoColour);
+        svg.userInputText(answers.text, answers.textColour); 
+
 
         console.log('Generated logo.svg, check your folder');
         //function to create logo here
