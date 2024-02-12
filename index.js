@@ -1,7 +1,6 @@
 
 const fs = require('fs');
 const path = require('path');
-
 const SVG = require('./lib/svg.js') //connecting the shapes module
 const inquirer = require('inquirer');
 // const logoPrompts = require('./lib/questions')
@@ -56,17 +55,21 @@ async function logoPrompts() {
 
 
         ]);
+        //variable 'mySvg for storing our new svg
+        //this variable triggets the SVG.js and passes teh bg fill parameter to it
+        let mySvg = new SVG(answers.bgFill);
 
-        //calls my SVG class+constructor and passes the bgFill to it
-        let svg = new SVG(answers.bgFill);
-        // Populate SVG object with shape and text passing these paramaters to their methods
-        svg.userInputShape(answers.shapeType, answers.logoColour);
-        svg.userInputText(answers.text, answers.textColour); 
-
+        //our variable then utilises the methods within SVG to pass the inquirer answers to it
+        mySvg.userInputShape(answers.shapeType, answers.logoColour);
+        mySvg.userInputText(answers.text, answers.textColour); 
      
-        console.log('Generated logo.svg, check your output folder');
         
-        //function to create logo here
+    //we use file system to access the method 'generateSVG() within SVG.js utilising teh data we programmed into mySVG variable
+    //this will write a mylogo.svg to our project
+        fs.writeFile( 'mylogo.svg', mySvg.generateSVG(), (err)=> {
+            if (err) throw 'there has been an error' + err;
+            console.log('CONGRATS! You have generated logo.svg, check your output folder');});        
+        
 
     } catch (error) {
         console.log('This generator has malfunctioned, please try again', error);
@@ -75,5 +78,4 @@ async function logoPrompts() {
 
 };
 
-let filename = path.basename('./output')
 logoPrompts();
