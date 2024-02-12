@@ -1,7 +1,8 @@
 
 const fs = require('fs');
 const path = require('path');
-const svgMaker = require('./lib/svg.js') //connecting the shapes module
+
+const SVG = require('./lib/svg.js') //connecting the shapes module
 const inquirer = require('inquirer');
 // const logoPrompts = require('./lib/questions')
 
@@ -62,8 +63,9 @@ async function logoPrompts() {
         svg.userInputShape(answers.shapeType, answers.logoColour);
         svg.userInputText(answers.text, answers.textColour); 
 
-
-        console.log('Generated logo.svg, check your folder');
+     
+        console.log('Generated logo.svg, check your output folder');
+        
         //function to create logo here
 
     } catch (error) {
@@ -73,5 +75,5 @@ async function logoPrompts() {
 
 };
 
-
+let filename = path.basename('./output')
 logoPrompts();
