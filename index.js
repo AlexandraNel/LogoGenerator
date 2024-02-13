@@ -1,9 +1,13 @@
 
 const fs = require('fs');
-const path = require('path');
 const SVG = require('./lib/svg.js') //connecting the shapes module
 const inquirer = require('inquirer');
+//brings in max-length input for inquirere
+const maxLengthInput = require('inquirer-maxlength-input-prompt');
+//registers maxlength-input for inquirer
+inquirer.registerPrompt('maxlength-input', maxLengthInput)
 // const logoPrompts = require('./lib/questions')
+
 
 async function logoPrompts() {
     //try block means I can use one .catch function for the entire block
@@ -27,9 +31,10 @@ async function logoPrompts() {
 
         const answers = await inquirer.prompt([
             {
-                type: 'input',
+                type: 'maxlength-input',
                 name: 'text',
                 message: 'Choose up to 3 letters for your logo',
+                maxLength: 3
             },
             {
                 type: 'input',
@@ -61,15 +66,16 @@ async function logoPrompts() {
 
         //our variable then utilises the methods within SVG to pass the inquirer answers to it
         mySvg.userInputShape(answers.shapeType, answers.logoColour);
-        mySvg.userInputText(answers.text, answers.textColour); 
-     
-        
-    //we use file system to access the method 'generateSVG() within SVG.js utilising teh data we programmed into mySVG variable
-    //this will write a mylogo.svg to our project
-        fs.writeFile( 'mylogo.svg', mySvg.generateSVG(), (err)=> {
+        mySvg.userInputText(answers.text, answers.textColour);
+
+
+        //we use file system to access the method 'generateSVG() within SVG.js utilising teh data we programmed into mySVG variable
+        //this will write a mylogo.svg to our project
+        fs.writeFile('mylogo.svg', mySvg.generateSVG(), (err) => {
             if (err) throw 'there has been an error' + err;
-            console.log('CONGRATS! You have generated logo.svg, check your output folder');});        
-        
+            console.log('CONGRATS! You have generated logo.svg, check your output folder');
+        });
+
 
     } catch (error) {
         console.log('This generator has malfunctioned, please try again', error);
